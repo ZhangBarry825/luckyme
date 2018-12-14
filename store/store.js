@@ -4,10 +4,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
-    count:0
+    isPause:false
   },
   mutations:{
-    increment:state => state.count ++,
-    decrement:state => state.count --,
+    playMusic:state => state.isPause=true,
+    pauseMusic:state => state.isPause=false,
   }
 })
