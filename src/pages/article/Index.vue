@@ -85,8 +85,6 @@
     <div class="comment-list">
       <div class="comment-content">
         <div class="title">评论列表</div>
-        <!--PC版-->
-        <div id="SOHUCS" sid="请将此处替换为配置SourceID的语句"></div>
       </div>
     </div>
     <div class="bottom">
@@ -185,10 +183,6 @@
 
       window.addEventListener('scroll',this.handleScroll)
 
-      window.changyan.api.config({
-        appid: 'cyt94aag7',
-        conf : 'prod_335b634d08c8491505ae3698b8ffe830'
-      });
     }
   };
 </script>
