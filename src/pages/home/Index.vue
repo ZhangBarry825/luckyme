@@ -63,7 +63,7 @@
       </div>
     </div>
     <div class="top" id="top" @click="toTop">
-      <!--<img class="top-img" data-depth="0.1"  src="../../assets/top.png">-->
+      <img class="top-img" data-depth="0.1"  src="../../assets/top.png">
     </div>
   </div>
 
@@ -128,12 +128,13 @@
     text-align: center;
     width: 100%;
     height: 100%;
+    min-width: 1200px;
     background-color: gainsboro;
     .top {
       z-index: 3;
       position: fixed;
       right: 50px;
-      top: 50px;
+      bottom: 50px;
       cursor: pointer;
       .top-img {
         height: 100px;
@@ -142,6 +143,7 @@
     .scene {
       width: 100%;
       height: 100%;
+      min-width: 1200px;
       overflow: hidden;
 
       .back-img {
@@ -164,6 +166,7 @@
     }
     .content {
       width: 100%;
+      min-width: 1200px;
       background-color: antiquewhite;
       display: flex;
       flex-direction: column;
