@@ -5,7 +5,7 @@
       <div class="back-img" id="back-img" data-depth="0.1" :style="'background-image: url('+backImg+')'">
         <img class="img1" data-depth="0.2" src="../../assets/plane.png">
         <img class="img2" data-depth="0.1" src="../../assets/cloud1.png">
-        <img class="img3" data-depth="0.2" src="../../assets/cloud2.png">
+        <img class="img3" data-depth="0.1" src="../../assets/cloud2.png">
         <img class="img4" data-depth="0.3" src="../../assets/cloud2.png">
       </div>
     </div>
