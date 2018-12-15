@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content-player">
       <audio  id="player" autoplay @ended="ended">
         <source :src="musicMp3" type="audio/mp3" id="mp3">
         <source :src="musicOgg" type="audio/ogg" id="ogg">
@@ -71,6 +71,11 @@
 </script>
 
 <style scoped lang="less">
+  .content-player{
+    display: block;
+    width: 100%;
+    z-index: 5;
+  }
 .logo{
   i{
     cursor: pointer;

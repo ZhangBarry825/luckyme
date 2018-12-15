@@ -2,17 +2,17 @@
   <div class="page">
     <div class="top">
       <transition name="fade">
-        <div class="article-title" v-show="displayTitle" transition="fade">我们都曾畏惧告别</div>
+        <div class="article-title" v-show="displayTitle" transition="fade">{{article.title}}</div>
       </transition>
     </div>
     <div class="content">
-      <div class="title">我们都曾畏惧告别</div>
+      <div class="title">{{article.title}}</div>
       <div class="info">
         <div class="time">
-          九月 24, 2017
+          {{article.update_time}}
         </div>
         <div class="view">
-          阅读 38029
+          阅读 {{article.looked}}
         </div>
         <div class="word-num">
           字数 3218
@@ -153,17 +153,26 @@
         </div>
       </div>
     </div>
+    <GoTop></GoTop>
   </div>
 </template>
 
 <script>
+  import GoTop from '../../components/GoTop'
+  import {dataGet} from "../../../plugins/axiosFn";
+  import {timeFormat} from "../../../plugins/Methods";
   export default {
     name   : "Article",
     data() {
       return {
         exampleImg  : require('../../assets/example.png'),
-        displayTitle: false
+        displayTitle: false,
+        id:this.$route.query.id,
+        article:{}
       };
+    },
+    components:{
+      GoTop
     },
     methods: {
       dis() {
@@ -175,14 +184,22 @@
         }else {
           this.displayTitle=true
         }
-
+      },
+      loadArticle(){
+        dataGet('/api/home/article/detailarticle', {
+          id:this.id
+        }, (data, all) => {
+          console.log(data.data)
+          data.data.update_time=timeFormat(data.data.update_time)
+          this.article=data.data
+          document.title='文章 | '+this.article.title
+        });
       }
     },
     mounted() {
-      document.title='文章 | 我们都曾畏惧告别'
 
       window.addEventListener('scroll',this.handleScroll)
-
+      this.loadArticle()
     }
   };
 </script>

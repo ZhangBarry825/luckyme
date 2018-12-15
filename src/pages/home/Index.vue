@@ -1,110 +1,163 @@
 <template>
   <div class="page">
+    <Player style="position: fixed"></Player>
     <div class="scene" id="scene">
       <div class="back-img" id="back-img" data-depth="0.1" :style="'background-image: url('+backImg+')'">
         <img class="img1" data-depth="0.2" src="../../assets/plane.png">
+        <img class="img2" data-depth="0.1" src="../../assets/cloud1.png">
+        <img class="img3" data-depth="0.2" src="../../assets/cloud2.png">
+        <img class="img4" data-depth="0.3" src="../../assets/cloud2.png">
       </div>
     </div>
     <div class="content">
       <div class="line"></div>
       <img class="img_tree" data-depth="0.2" src="../../assets/tree.png">
-      <div class="item-right">
-        <div class="pic" :style="'background-image: url('+exampleImg+')'"></div>
-        <div class="detail">
-          <div class="time">三月 31，2018</div>
-          <div class="title">终有弱水替沧海，再把相思寄巫山</div>
-          <div class="description">
-            孤独伴随着夜晚沮丧的泪水。
-            换一个思维过这开心的生活。
-          </div>
-          <div class="bottom">
-            <div class="comment">
-              <img src="../../assets/message.png">
-              <a>50</a>
+
+      <div v-for="(item, index) in articleList" style="z-index: 3">
+        <div class="item-right" v-if="index%2==0">
+          <div v-if="!item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+exampleImg+')'"></div>
+          <div v-if="item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          <div class="detail">
+            <div class="time">{{item.update_time}}</div>
+            <div class="title" @click="goDetail(item)">{{item.title}}</div>
+            <div class="description">
+              {{item.description}}
             </div>
-            <div class="view">
-              <img src="../../assets/eye.png">
-              <a>50000</a>
-            </div>
-            <div class="collection">
-              <img src="../../assets/collection.png">
-              <a>50</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="item-left">
-        <div class="detail">
-          <div class="time">三月 31，2018</div>
-          <div class="title">终有弱水替沧海，再把相思寄巫山</div>
-          <div class="description">
-            孤独伴随着夜晚沮丧的泪水。
-            换一个思维过这开心的生活。
-          </div>
-          <div class="bottom">
-            <div class="comment">
-              <img src="../../assets/message.png">
-              <a>50</a>
-            </div>
-            <div class="view">
-              <img src="../../assets/eye.png">
-              <a>50000</a>
-            </div>
-            <div class="collection">
-              <img src="../../assets/collection.png">
-              <a>50</a>
+            <div class="bottom">
+              <div class="comment">
+                <img src="../../assets/message.png">
+                <a>50</a>
+              </div>
+              <div class="view">
+                <img src="../../assets/eye.png">
+                <a>{{item.looked}}</a>
+              </div>
+              <div class="collection">
+                <img src="../../assets/collection.png">
+                <a>50</a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="pic" :style="'background-image: url('+exampleImg+')'"></div>
+        <div class="item-left" v-if="index%2==1">
+          <div class="detail">
+            <div class="time">{{item.update_time}}</div>
+            <div class="title" @click="goDetail(item)">{{item.title}}</div>
+            <div class="description">
+              {{item.description}}
+            </div>
+            <div class="bottom">
+              <div class="comment">
+                <img src="../../assets/message.png">
+                <a>50</a>
+              </div>
+              <div class="view">
+                <img src="../../assets/eye.png">
+                <a>{{item.looked}}</a>
+              </div>
+              <div class="collection">
+                <img src="../../assets/collection.png">
+                <a>50</a>
+              </div>
+            </div>
+          </div>
+          <div v-if="!item.cover" @click="goDetail(item)" class="pic" :style="'background-image: url('+exampleImg+')'"></div>
+          <div class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+        </div>
       </div>
-      <div class="more">
-        加载更多
+
+      <div class="more" @click="loadMore">
+        <a v-if="!loading && !noMore">加载更多</a>
+        <a v-if="!loading && noMore">已全部加载</a>
+        <i v-if="loading" class="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>
       </div>
     </div>
-    <div class="top" id="top" @click="toTop">
-      <img class="top-img" data-depth="0.1"  src="../../assets/top.png">
-    </div>
+    <GoTop></GoTop>
   </div>
 
 </template>
 
 <script>
   import Parallax from 'parallax-js';
+  import Player from '@/components/Player';
+  import {dataGet} from "../../../plugins/axiosFn";
+  import {timeFormat} from "../../../plugins/Methods";
+  import GoTop from '../../components/GoTop'
 
   export default {
-    name   : "Home",
+    name: "Home",
     data() {
       return {
-        backImg     : require('../../assets/sky.jpg'),
-        exampleImg  : require('../../assets/example.png'),
-        screenWidth : document.documentElement.clientWidth,
+        backImg: require('../../assets/sky.jpg'),
+        exampleImg: require('../../assets/example.png'),
+        screenWidth: document.documentElement.clientWidth,
         screenHeight: document.documentElement.clientHeight,
+        loading: false,
+        noMore:false,
+        pageNum: 1,
+        pageSize: 2,
+        allNum: 0,
+        articleList: []
       };
     },
+    components: {
+      Player,
+      GoTop
+    },
     methods: {
-      toTop() {
-        console.log('hahah');
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+      loadMore() {
+        this.loading = true
+        setTimeout(() => {
+          dataGet('/api/home/article/listarticle', {
+            page_num: this.pageNum+1,
+            page_size: this.pageSize
+          }, (data, all) => {
+            if(data.data.articles){
+              for(let i=0;i<data.data.articles.length;i++){
+                data.data.articles[i].update_time=timeFormat(data.data.articles[i].update_time)
+              }
+              this.articleList=this.articleList.concat(data.data.articles)
+              this.pageNum=this.pageNum+1
+              this.allNum += data.data.total
+            }else {
+              this.noMore=true
+            }
+            this.loading = false
+          });
+        }, 500)
+      },
+      firstLoad(){
+        this.loading = true
+        setTimeout(() => {
+          dataGet('/api/home/article/listarticle', {
+            page_num: 1,
+            page_size: this.pageSize
+          }, (data, all) => {
+            if(data.data.articles){
+              for(let i=0;i<data.data.articles.length;i++){
+                data.data.articles[i].update_time=timeFormat(data.data.articles[i].update_time)
+              }
+              this.articleList=this.articleList.concat(data.data.articles)
+              this.allNum += data.data.total
+            }else {
+              this.noMore=true
+            }
+            this.loading = false
+          });
+        }, 500)
+      },
+      goDetail(row){
+        console.log(row,'go')
+
+        let params={id: row.id}
+        let routeData = this.$router.resolve({
+          path: '/article',
+          query: params,
+        });
+        window.open(routeData.href, '_blank');
       }
     },
     mounted() {
-      let that = this;
-      let scene = document.getElementById('scene');
-      let parallaxInstance0 = new Parallax(scene, {
-        relativeInput: true
-      });
-
-      let top = document.getElementById('top');
-      let parallaxInstance1 = new Parallax(top, {
-        relativeInput: true
-      });
-
-      let back = document.getElementById('back-img');
-      let parallaxInstance2 = new Parallax(back, {
-        relativeInput: true
-      });
       $('.scene').height(this.screenHeight);
       $('.scene').width(this.screenWidth);
 
@@ -118,6 +171,15 @@
         $('.scene').width($(window).width());
       });
 
+      let scene = document.getElementById('scene');
+      let parallaxInstance0 = new Parallax(scene, {
+        relativeInput: true
+      });
+      let back = document.getElementById('back-img');
+      let parallaxInstance2 = new Parallax(back, {
+        relativeInput: true
+      });
+      this.firstLoad()
     }
   };
 </script>
@@ -133,12 +195,21 @@
     .top {
       z-index: 3;
       position: fixed;
-      right: 50px;
+      right: 70px;
       bottom: 50px;
       cursor: pointer;
       .top-img {
         height: 100px;
       }
+    }
+    .goTop{
+      z-index: 100;
+      position: fixed;
+      height: 100px;
+      width: 100px;
+      right: 50px;
+      bottom: 45px;
+      cursor: pointer;
     }
     .scene {
       width: 100%;
@@ -160,8 +231,26 @@
       .img1 {
         width: 100px;
         height: 100px;
-        margin-left: 300px;
+        margin-left: 15%;
         margin-top: 200px;
+      }
+      .img2 {
+        width: 210px;
+        height: auto;
+        margin-left: 12%;
+        margin-top: 700px;
+      }
+      .img3 {
+        width: 250px;
+        height: auto;
+        margin-left: 50%;
+        margin-top: 400px;
+      }
+      .img4 {
+        width: 300px;
+        height: auto;
+        margin-left: 30%;
+        margin-top: 160px;
       }
     }
     .content {
@@ -289,6 +378,7 @@
           height: 90%;
           background-color: antiquewhite;
           border: 1px solid gainsboro;
+          border-right: 0;
           padding: 50px;
           box-sizing: border-box;
           .time {
@@ -350,7 +440,7 @@
           }
         }
       }
-      .more{
+      .more {
         margin: 50px 50px;
         z-index: 1;
         width: 200px;
@@ -364,6 +454,9 @@
         justify-content: center;
         align-self: center;
         cursor: pointer;
+        i {
+          margin: 0 auto;
+        }
       }
     }
   }

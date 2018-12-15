@@ -12,6 +12,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.min.css';
 
+//挂载全局常量
+import global_ from './components/Global'
+Vue.prototype.GLOBALDATA = global_
+
+
+import("babel-polyfill")
 
 Vue.use(ElementUI);
 
