@@ -7,15 +7,24 @@
           <img style="width: 100%"  src="../../assets/plane.png">
         </div>
         <div class="img2" data-depth="0.1">
-          <img style="width: 100%" src="../../assets/cloud1.png"></div>
-        <div class="img3" data-depth="0.1"><img style="width: 100%" src="../../assets/cloud2.png">
+          <img style="width: 100%" src="../../assets/cloud1.png">
+          <div class="me me5" :style="'background-image: url('+meList.list5+')'"></div>
+        </div>
+        <div class="img3" data-depth="0.1">
+          <img style="width: 100%" src="../../assets/cloud2.png">
+          <div class="me me3" :style="'background-image: url('+meList.list3+')'"></div>
         </div>
         <div class="img4" data-depth="0.3">
           <img style="width: 100%"  src="../../assets/cloud2.png">
+          <div class="me me1" :style="'background-image: url('+meList.list1+')'"></div>
         </div>
-        <div class="img5" data-depth="0.05">
-          <img style="width: 100%"  src="../../assets/boat.png">
+        <div class="img5" data-depth="0.3">
+          <img style="width: 100%"  src="../../assets/cloud2.png">
+          <div class="me me6" :style="'background-image: url('+meList.list6+')'"></div>
         </div>
+        <!--<div class="img6" data-depth="0.05">-->
+          <!--<img style="width: 100%"  src="../../assets/boat.png">-->
+        <!--</div>-->
       </div>
     </div>
     <div class="content">
@@ -110,7 +119,15 @@
         pageNum: 1,
         pageSize: 3,
         allNum: 0,
-        articleList: []
+        articleList: [],
+        meList:{
+          list1:require('../../assets/me/1.jpg'),
+          list2:require('../../assets/me/2.jpg'),
+          list3:require('../../assets/me/3.jpg'),
+          list4:require('../../assets/me/4.jpg'),
+          list5:require('../../assets/me/5.jpg'),
+          list6:require('../../assets/me/6.jpg'),
+        }
       };
     },
     components: {
@@ -240,18 +257,55 @@
         background-size: auto 100%;
         background-position: center;
         background-repeat: repeat;
+        .me{
+          margin: 0 auto;
+          width: 40%;
+          height: 80px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          /*opacity: 1;*/
+          border-radius: 20%;
+          z-index: 555;
+          position: relative;
+        }
+        .me:hover{
+          opacity: 1;
+        }
+        .me1{
+          width: 40%;
+          height: 100px;
+          margin-top: -200px;
+        }
+        .me3{
+          width: 30%;
+          height: 80px;
+          margin-top: -170px;
+        }
+        .me5{
+          width: 25%;
+          height: 80px;
+          margin-top: -140px;
+        }
+        .me6{
+          width: 60%;
+          height: 100px;
+          margin-top: -250px;
+        }
       }
       .img1 {
         width: 100px;
         height: 100px;
         margin-left: 15%;
         margin-top: 10%;
+        z-index: 1;
       }
       .img2 {
-        width: 210px;
+        width: 320px;
         height: auto;
         margin-left: 12%;
         margin-top: 28%;
+        z-index: 1;
       }
       .img3 {
         width: 250px;
@@ -266,6 +320,12 @@
         margin-top: 5%;
       }
       .img5 {
+        width: 400px;
+        height: auto;
+        margin-left: 60%;
+        margin-top: 20%;
+      }
+      .img6 {
         width: 300px;
         height: auto;
         margin-left: 53%;

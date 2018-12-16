@@ -21,7 +21,9 @@
           评论 53
         </div>
         <div class="collection">
-          喜欢 {{article.liked}}
+          <div v-if="isLike" @click="unlikeArticle" class="like-logo" :style="'background-image:url('+likeLogo+')'"></div>
+          <div v-if="!isLike" @click="likeArticle" class="like-logo" :style="'background-image:url('+unlikeLogo+')'"></div>
+          <a >喜欢 {{article.liked}}</a>
         </div>
       </div>
       <div class="line"></div>
@@ -74,13 +76,37 @@
         displayTitle: false,
         id:this.$route.query.id,
         article:{},
-        articleList:[]
+        articleList:[],
+        likeLogo:require('../../assets/liked.png'),
+        unlikeLogo:require('../../assets/unliked.png'),
+        isLike:false
       };
     },
     components:{
       GoTop
     },
     methods: {
+      likeArticle(){
+        dataGet('/api/home/article/likearticle', {
+          id:this.id
+        }, (data, all) => {
+          if(data.code===200){
+            this.isLike=true
+            this.article.liked+=1
+          }
+          console.log(data)
+        });
+      },
+      unlikeArticle(){
+        dataGet('/api/home/article/unlikearticle', {
+          id:this.id
+        }, (data, all) => {
+          if(data.code===200){
+            this.isLike=false
+            this.article.liked-=1
+          }
+        });
+      },
       goTop(){
         toTop()
       },
@@ -225,6 +251,20 @@
         font-size: 13px;
         .time, .view, .word-num, .comment, .collection {
           margin-right: 20px;
+        }
+        .collection{
+          .like-logo{
+            width: 18px;
+            height: 18px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: left;
+            cursor: pointer;
+          }
+          a{
+            margin-left: 3px;
+            float: left;
+          }
         }
       }
       .line {
