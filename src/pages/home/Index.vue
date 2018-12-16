@@ -85,7 +85,7 @@
           </div>
           <div v-if="!item.cover" @click="goDetail(item)" class="pic"
                :style="'background-image: url('+exampleImg+')'"></div>
-          <div class="pic" @click="goDetail(item)"
+          <div v-if="item.cover" class="pic" @click="goDetail(item)"
                :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
         </div>
       </div>

@@ -192,6 +192,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    background-color: rgba(253,241,223,0.17);
 
     .fade-enter-active, .fade-leave-active {
       transition: opacity .8s
@@ -313,7 +314,7 @@
     }
     .bottom {
       width: 100%;
-      background-color: #fafafa;
+      background-color: rgba(232,226,210,0.09);
       padding-bottom: 50px;
       display: flex;
       flex-direction: column;
