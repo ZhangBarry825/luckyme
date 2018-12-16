@@ -42,7 +42,7 @@
         <div class="button">
           <div class="left">相关文章</div>
           <div class="right">
-            <a @click="goTop">返回顶部</a>
+            <a @click="goIndex">返回首页</a>
             <a @click="preArticle">上一篇</a>
             <a @click="nextArticle">下一篇</a>
           </div>
@@ -107,8 +107,11 @@
           }
         });
       },
-      goTop(){
-        toTop()
+      goIndex(){
+        let routeData = this.$router.resolve({
+          path: '/',
+        });
+        window.open(routeData.href, '_blank');
       },
       dis() {
         this.displayTitle = !this.displayTitle;
