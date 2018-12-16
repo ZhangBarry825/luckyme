@@ -3,10 +3,19 @@
     <Player style="position: fixed"></Player>
     <div class="scene" id="scene">
       <div class="back-img" id="back-img" data-depth="0.1" :style="'background-image: url('+backImg+')'">
-        <img class="img1" data-depth="0.2" src="../../assets/plane.png">
-        <img class="img2" data-depth="0.1" src="../../assets/cloud1.png">
-        <img class="img3" data-depth="0.1" src="../../assets/cloud2.png">
-        <img class="img4" data-depth="0.3" src="../../assets/cloud2.png">
+        <div class="img1" data-depth="0.2">
+          <img style="width: 100%"  src="../../assets/plane.png">
+        </div>
+        <div class="img2" data-depth="0.1">
+          <img style="width: 100%" src="../../assets/cloud1.png"></div>
+        <div class="img3" data-depth="0.1"><img style="width: 100%" src="../../assets/cloud2.png">
+        </div>
+        <div class="img4" data-depth="0.3">
+          <img style="width: 100%"  src="../../assets/cloud2.png">
+        </div>
+        <div class="img5" data-depth="0.05">
+          <img style="width: 100%"  src="../../assets/boat.png">
+        </div>
       </div>
     </div>
     <div class="content">
@@ -15,8 +24,10 @@
 
       <div v-for="(item, index) in articleList" style="z-index: 3">
         <div class="item-right" v-if="index%2==0">
-          <div v-if="!item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+exampleImg+')'"></div>
-          <div v-if="item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          <div v-if="!item.cover" class="pic" @click="goDetail(item)"
+               :style="'background-image: url('+exampleImg+')'"></div>
+          <div v-if="item.cover" class="pic" @click="goDetail(item)"
+               :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
           <div class="detail">
             <div class="time">{{item.update_time}}</div>
             <div class="title" @click="goDetail(item)">{{item.title}}</div>
@@ -34,7 +45,7 @@
               </div>
               <div class="collection">
                 <img src="../../assets/collection.png">
-                <a>50</a>
+                <a>{{item.liked}}</a>
               </div>
             </div>
           </div>
@@ -57,12 +68,14 @@
               </div>
               <div class="collection">
                 <img src="../../assets/collection.png">
-                <a>50</a>
+                <a>{{item.liked}}</a>
               </div>
             </div>
           </div>
-          <div v-if="!item.cover" @click="goDetail(item)" class="pic" :style="'background-image: url('+exampleImg+')'"></div>
-          <div class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          <div v-if="!item.cover" @click="goDetail(item)" class="pic"
+               :style="'background-image: url('+exampleImg+')'"></div>
+          <div class="pic" @click="goDetail(item)"
+               :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
         </div>
       </div>
 
@@ -93,9 +106,9 @@
         screenWidth: document.documentElement.clientWidth,
         screenHeight: document.documentElement.clientHeight,
         loading: false,
-        noMore:false,
+        noMore: false,
         pageNum: 1,
-        pageSize: 2,
+        pageSize: 3,
         allNum: 0,
         articleList: []
       };
@@ -109,47 +122,47 @@
         this.loading = true
         setTimeout(() => {
           dataGet('/api/home/article/listarticle', {
-            page_num: this.pageNum+1,
+            page_num: this.pageNum + 1,
             page_size: this.pageSize
           }, (data, all) => {
-            if(data.data.articles){
-              for(let i=0;i<data.data.articles.length;i++){
-                data.data.articles[i].update_time=timeFormat(data.data.articles[i].update_time)
+            if (data.data.articles) {
+              for (let i = 0; i < data.data.articles.length; i++) {
+                data.data.articles[i].update_time = timeFormat(data.data.articles[i].update_time)
               }
-              this.articleList=this.articleList.concat(data.data.articles)
-              this.pageNum=this.pageNum+1
+              this.articleList = this.articleList.concat(data.data.articles)
+              this.pageNum = this.pageNum + 1
               this.allNum += data.data.total
-            }else {
-              this.noMore=true
+            } else {
+              this.noMore = true
             }
             this.loading = false
           });
         }, 500)
       },
-      firstLoad(){
+      firstLoad() {
         this.loading = true
         setTimeout(() => {
           dataGet('/api/home/article/listarticle', {
             page_num: 1,
             page_size: this.pageSize
           }, (data, all) => {
-            if(data.data.articles){
-              for(let i=0;i<data.data.articles.length;i++){
-                data.data.articles[i].update_time=timeFormat(data.data.articles[i].update_time)
+            if (data.data.articles) {
+              for (let i = 0; i < data.data.articles.length; i++) {
+                data.data.articles[i].update_time = timeFormat(data.data.articles[i].update_time)
               }
-              this.articleList=this.articleList.concat(data.data.articles)
+              this.articleList = this.articleList.concat(data.data.articles)
               this.allNum += data.data.total
-            }else {
-              this.noMore=true
+            } else {
+              this.noMore = true
             }
             this.loading = false
           });
         }, 500)
       },
-      goDetail(row){
-        console.log(row,'go')
+      goDetail(row) {
+        console.log(row, 'go')
 
-        let params={id: row.id}
+        let params = {id: row.id}
         let routeData = this.$router.resolve({
           path: '/article',
           query: params,
@@ -202,7 +215,7 @@
         height: 100px;
       }
     }
-    .goTop{
+    .goTop {
       z-index: 100;
       position: fixed;
       height: 100px;
@@ -232,25 +245,31 @@
         width: 100px;
         height: 100px;
         margin-left: 15%;
-        margin-top: 200px;
+        margin-top: 10%;
       }
       .img2 {
         width: 210px;
         height: auto;
         margin-left: 12%;
-        margin-top: 700px;
+        margin-top: 28%;
       }
       .img3 {
         width: 250px;
         height: auto;
         margin-left: 50%;
-        margin-top: 400px;
+        margin-top: 15%;
       }
       .img4 {
         width: 300px;
         height: auto;
         margin-left: 30%;
-        margin-top: 160px;
+        margin-top: 5%;
+      }
+      .img5 {
+        width: 300px;
+        height: auto;
+        margin-left: 53%;
+        margin-top: 36.5%;
       }
     }
     .content {

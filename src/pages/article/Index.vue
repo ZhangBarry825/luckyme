@@ -21,7 +21,7 @@
           评论 53
         </div>
         <div class="collection">
-          喜欢 202
+          喜欢 {{article.liked}}
         </div>
       </div>
       <div class="line"></div>
@@ -40,9 +40,9 @@
         <div class="button">
           <div class="left">相关文章</div>
           <div class="right">
-            <a href="#">返回顶部</a>
-            <a href="#">上一篇</a>
-            <a href="#">下一篇</a>
+            <a @click="goTop">返回顶部</a>
+            <a @click="preArticle">上一篇</a>
+            <a @click="nextArticle">下一篇</a>
           </div>
         </div>
         <div class="item" v-for="item in articleList">
@@ -65,7 +65,7 @@
 <script>
   import GoTop from '../../components/GoTop'
   import {dataGet} from "../../../plugins/axiosFn";
-  import {timeFormat} from "../../../plugins/Methods";
+  import {timeFormat, toTop} from "../../../plugins/Methods";
   export default {
     name   : "Article",
     data() {
@@ -81,6 +81,9 @@
       GoTop
     },
     methods: {
+      goTop(){
+        toTop()
+      },
       dis() {
         this.displayTitle = !this.displayTitle;
       },
@@ -122,6 +125,20 @@
           query: params,
         });
         window.open(routeData.href, '_blank');
+      },
+      preArticle(){
+        dataGet('/api/home/article/prearticle', {
+          id:this.id
+        }, (data, all) => {
+          this.goDetail(data.data)
+        });
+      },
+      nextArticle(){
+        dataGet('/api/home/article/nextarticle', {
+          id:this.id
+        }, (data, all) => {
+          this.goDetail(data.data)
+        });
       }
     },
     mounted() {
@@ -279,6 +296,7 @@
               margin-left: 14px;
               text-decoration: none;
               color: #666;
+              cursor: pointer;
             }
           }
         }
