@@ -264,10 +264,10 @@
           margin: 0 auto;
           width: 40%;
           height: 80px;
-          background-size: cover;
+          background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
-          opacity: 0.1;
+          opacity: 0.2;
           border-radius: 30%;
           z-index: 555;
           position: relative;
