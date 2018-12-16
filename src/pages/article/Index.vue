@@ -55,7 +55,7 @@
             </div>
           </div>
           <div v-if="!item.cover" @click="goDetail(item)" class="pic" :style="'background-image: url('+exampleImg+')'"></div>
-          <div class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          <div v-if="item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
         </div>
 
       </div>
@@ -238,6 +238,9 @@
       flex-direction: column;
       justify-content: flex-start;
       /*align-items: center;*/
+      img{
+        width: 100%;
+      }
       .title {
         color: #333;
         font-size: 30px;
@@ -285,7 +288,7 @@
         width: 100%;
         padding: 20px 0;
         .content{
-          margin-bottom: 30px;
+          margin-bottom: 100px;
           font-size: 14px;
           line-height: 2;
           color: #333;
@@ -348,10 +351,10 @@
           width: 100%;
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: space-around;
           position: relative;
           .item-detail {
-            max-width: 500px;
+            width: 500px;
             .title {
               font-size: 24px;
               color: #333;
