@@ -30,6 +30,10 @@
                 musicMp3:this.GLOBALDATA.serverUrl+'static/music/PlanetFall.mp3',
                 musicOgg:this.GLOBALDATA.serverUrl+'static/music/PlanetFall.ogg',
               },
+              {
+                musicMp3:this.GLOBALDATA.serverUrl+'static/music/TakeMeHomeCountryRoads.mp3',
+                musicOgg:this.GLOBALDATA.serverUrl+'static/music/TakeMeHomeCountryRoads.ogg',
+              },
             ],
             nowMusic:1,
             isPause:false

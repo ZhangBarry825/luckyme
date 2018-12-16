@@ -1,7 +1,7 @@
 <script>
-  // const serverUrl='http://luckyme.barry.umdev.cn/';
-  const serverUrl='/api/';
-  const showMe=false;
+  const serverUrl='http://api.luckyme.com.cn/';
+  // const serverUrl='/api/';
+  const showMe=true;
   export default
   {
     serverUrl,//Url地址
