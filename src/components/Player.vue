@@ -20,14 +20,15 @@
           return{
             musicMp3:'',
             musicOgg:'',
+
             musicList:[
               {
-                musicMp3:require('../assets/mp3/girl.mp3'),
-                musicOgg:require('../assets/mp3/girl.ogg'),
+                musicMp3:this.GLOBALDATA.serverUrl+'static/music/girl.mp3',
+                musicOgg:this.GLOBALDATA.serverUrl+'static/music/girl.ogg',
               },
               {
-                musicMp3:require('../assets/mp3/PlanetFall.mp3'),
-                musicOgg:require('../assets/mp3/PlanetFall.ogg'),
+                musicMp3:this.GLOBALDATA.serverUrl+'static/music/PlanetFall.mp3',
+                musicOgg:this.GLOBALDATA.serverUrl+'static/music/PlanetFall.ogg',
               },
             ],
             nowMusic:1,

@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <Player style="position: fixed"></Player>
-    <div class="scene" id="scene">
+    <div class="scene" id="scene" style="position:relative ">
       <div class="back-img" id="back-img" data-depth="0.1" :style="'background-image: url('+backImg+')'">
         <div class="img1" data-depth="0.2">
           <img style="width: 100%"  src="../../assets/plane.png">
@@ -22,10 +22,12 @@
           <img style="width: 100%"  src="../../assets/cloud2.png">
           <div class="me me6" :style="'background-image: url('+meList.list6+')'"></div>
         </div>
-        <!--<div class="img6" data-depth="0.05">-->
-          <!--<img style="width: 100%"  src="../../assets/boat.png">-->
-        <!--</div>-->
+        <div class="img6" data-depth="0.05" :style="'margin-top:' +screenHeight*0.88+'px;margin-left:'+screenWidth*0.63+'px'">
+          <img style="width: 100%"  src="../../assets/boat.png">
+        </div>
+        <!--<div >{{screenHeight}}</div>-->
       </div>
+
     </div>
     <div class="content">
       <div class="line"></div>
@@ -46,7 +48,7 @@
             <div class="bottom">
               <div class="comment">
                 <img src="../../assets/message.png">
-                <a>50</a>
+                <a>0</a>
               </div>
               <div class="view">
                 <img src="../../assets/eye.png">
@@ -69,7 +71,7 @@
             <div class="bottom">
               <div class="comment">
                 <img src="../../assets/message.png">
-                <a>50</a>
+                <a>0</a>
               </div>
               <div class="view">
                 <img src="../../assets/eye.png">
@@ -264,8 +266,8 @@
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
-          /*opacity: 1;*/
-          border-radius: 20%;
+          opacity: 0.1;
+          border-radius: 30%;
           z-index: 555;
           position: relative;
         }
@@ -328,8 +330,6 @@
       .img6 {
         width: 300px;
         height: auto;
-        margin-left: 53%;
-        margin-top: 36.5%;
       }
     }
     .content {

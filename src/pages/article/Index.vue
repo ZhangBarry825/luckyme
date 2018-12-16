@@ -15,10 +15,10 @@
           阅读 {{article.looked}}
         </div>
         <div class="word-num">
-          字数 3218
+          字数 -
         </div>
         <div class="comment">
-          评论 53
+          评论 <a id="changyan_count_unit" style="text-decoration: none;color: #666">-</a>
         </div>
         <div class="collection">
           <div v-if="isLike" @click="unlikeArticle" class="like-logo" :style="'background-image:url('+likeLogo+')'"></div>
