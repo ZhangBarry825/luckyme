@@ -8,19 +8,19 @@
         </div>
         <div class="img2" data-depth="0.1">
           <img style="width: 100%" src="../../assets/cloud1.png">
-          <div class="me me5" :style="'background-image: url('+meList.list5+')'"></div>
+          <div v-if="showMe" class="me me5" :style="'background-image: url('+meList.list5+')'"></div>
         </div>
         <div class="img3" data-depth="0.1">
           <img style="width: 100%" src="../../assets/cloud2.png">
-          <div class="me me3" :style="'background-image: url('+meList.list3+')'"></div>
+          <div v-if="showMe" class="me me3" :style="'background-image: url('+meList.list3+')'"></div>
         </div>
         <div class="img4" data-depth="0.3">
           <img style="width: 100%"  src="../../assets/cloud2.png">
-          <div class="me me1" :style="'background-image: url('+meList.list1+')'"></div>
+          <div v-if="showMe" class="me me1" :style="'background-image: url('+meList.list1+')'"></div>
         </div>
         <div class="img5" data-depth="0.3">
           <img style="width: 100%"  src="../../assets/cloud2.png">
-          <div class="me me6" :style="'background-image: url('+meList.list6+')'"></div>
+          <div v-if="showMe" class="me me6" :style="'background-image: url('+meList.list6+')'"></div>
         </div>
         <div class="img6" data-depth="0.05" :style="'margin-top:' +screenHeight*0.88+'px;margin-left:'+screenWidth*0.63+'px'">
           <img style="width: 100%"  src="../../assets/boat.png">
@@ -122,6 +122,7 @@
         pageSize: 3,
         allNum: 0,
         articleList: [],
+        showMe:false,
         meList:{
           list1:require('../../assets/me/1.jpg'),
           list2:require('../../assets/me/2.jpg'),
