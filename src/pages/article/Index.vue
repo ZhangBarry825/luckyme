@@ -94,7 +94,7 @@
             this.isLike=true
             this.article.liked+=1
           }
-          console.log(data)
+          //console.log(data)
         });
       },
       unlikeArticle(){
@@ -127,7 +127,7 @@
         dataGet('/api/home/article/detailarticle', {
           id:this.id
         }, (data, all) => {
-          console.log(data.data)
+         // console.log(data.data)
           data.data.update_time=timeFormat(data.data.update_time)
           this.article=data.data
           document.title='文章 | '+this.article.title
@@ -143,7 +143,7 @@
               data.data.articles[i].update_time=timeFormat(data.data.articles[i].update_time)
             }
             this.articleList=this.articleList.concat(data.data.articles)
-            console.log(this.articleList,89)
+            //console.log(this.articleList,89)
           }
         });
       },

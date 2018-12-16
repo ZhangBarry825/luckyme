@@ -180,7 +180,7 @@
         }, 500)
       },
       goDetail(row) {
-        console.log(row, 'go')
+        //console.log(row, 'go')
 
         let params = {id: row.id}
         let routeData = this.$router.resolve({

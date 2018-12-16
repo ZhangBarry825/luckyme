@@ -25,7 +25,7 @@
           page_num:1,
           page_size:2
       },(data, all)=>{
-          console.log(data)
+          //console.log(data)
       });
       Message({message: '欢迎！', type: 'success'});
     }

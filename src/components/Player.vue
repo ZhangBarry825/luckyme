@@ -67,6 +67,9 @@
       mounted(){
           this.musicMp3=this.musicList[0].musicMp3
           this.musicOgg=this.musicList[0].musicOgg
+        setTimeout(()=>{
+          this.load()
+        },3000)
       }
     }
 </script>
