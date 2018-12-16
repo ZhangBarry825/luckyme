@@ -237,7 +237,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      /*align-items: center;*/
       .title {
         color: #333;
         font-size: 30px;
