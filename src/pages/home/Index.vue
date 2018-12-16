@@ -122,7 +122,7 @@
         pageSize: 3,
         allNum: 0,
         articleList: [],
-        showMe:false,
+        showMe:this.GLOBALDATA.showMe,
         meList:{
           list1:require('../../assets/me/1.jpg'),
           list2:require('../../assets/me/2.jpg'),
