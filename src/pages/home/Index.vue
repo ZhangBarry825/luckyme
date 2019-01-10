@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Player style="position: fixed"></Player>
+    <!--<Player style="position: fixed"></Player>-->
     <div class="scene" id="scene" style="position:relative ">
       <div class="back-img" id="back-img" data-depth="0.1" :style="'background-image: url('+backImg+')'">
         <div class="img1" data-depth="0.2">
@@ -22,9 +22,9 @@
           <img style="width: 100%"  src="../../assets/cloud2.png">
           <div v-if="showMe" class="me me6" :style="'background-image: url('+meList.list6+')'"></div>
         </div>
-        <div class="img6" data-depth="0.05" :style="'margin-top:' +screenHeight*0.88+'px;margin-left:'+screenWidth*0.63+'px'">
-          <img style="width: 100%"  src="../../assets/boat.png">
-        </div>
+        <!--<div class="img6" data-depth="0.05" :style="'margin-top:' +screenHeight*0.88+'px;margin-left:'+screenWidth*0.63+'px'">-->
+          <!--<img style="width: 100%"  src="../../assets/boat.png">-->
+        <!--</div>-->
         <!--<div >{{screenHeight}}</div>-->
       </div>
 
@@ -124,12 +124,12 @@
         articleList: [],
         showMe:this.GLOBALDATA.showMe,
         meList:{
-          list1:require('../../assets/me/1.jpg'),
-          list2:require('../../assets/me/2.jpg'),
-          list3:require('../../assets/me/3.jpg'),
-          list4:require('../../assets/me/4.jpg'),
-          list5:require('../../assets/me/5.jpg'),
-          list6:require('../../assets/me/6.jpg'),
+          // list1:require('../../assets/me/1.jpg'),
+          // list2:require('../../assets/me/2.jpg'),
+          // list3:require('../../assets/me/3.jpg'),
+          // list4:require('../../assets/me/4.jpg'),
+          // list5:require('../../assets/me/5.jpg'),
+          // list6:require('../../assets/me/6.jpg'),
         }
       };
     },
