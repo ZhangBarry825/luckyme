@@ -35,10 +35,12 @@
 
       <div v-for="(item, index) in articleList" style="z-index: 3">
         <div class="item-right" v-if="index%2==0">
-          <div v-if="!item.cover" class="pic" @click="goDetail(item)"
+          <div class="pic-box">
+            <div v-if="!item.cover" class="pic" @click="goDetail(item)"
                :style="'background-image: url('+exampleImg+')'"></div>
-          <div v-if="item.cover" class="pic" @click="goDetail(item)"
+            <div v-if="item.cover" class="pic" @click="goDetail(item)"
                :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          </div>
           <div class="detail">
             <div class="time">{{item.update_time}}</div>
             <div class="title" @click="goDetail(item)">{{item.title}}</div>
@@ -83,10 +85,12 @@
               </div>
             </div>
           </div>
-          <div v-if="!item.cover" @click="goDetail(item)" class="pic"
+          <div class="pic-box">
+            <div v-if="!item.cover" @click="goDetail(item)" class="pic"
                :style="'background-image: url('+exampleImg+')'"></div>
-          <div v-if="item.cover" class="pic" @click="goDetail(item)"
+            <div v-if="item.cover" class="pic" @click="goDetail(item)"
                :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          </div>
         </div>
       </div>
 
@@ -363,14 +367,32 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        .pic {
+        .pic-box{
           width: 60%;
+          height: 100%;
+          overflow: hidden;
+        }
+        .pic {
+          width: 100%;
           height: 100%;
           background-color: lightblue;
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center center;
           cursor: pointer;
+
+          transition: all 1s;
+          -moz-transition: all 1s;
+          -webkit-transition: all 1s;
+          -o-transition: all 1s;
+        }
+        .pic:hover{
+          transform: scale(1.05);
+          -ms-transform: scale(1.05);
+          -webkit-transform: scale(1.05);
+          -o-transform: scale(1.05);
+          -moz-transform: scale(1.05);
+          transition: 1.5s transform;
         }
         .detail {
           width: 40%;
@@ -444,14 +466,32 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        .pic {
+        .pic-box{
           width: 60%;
+          height: 100%;
+          overflow: hidden;
+        }
+        .pic {
+          width: 100%;
           height: 100%;
           background-color: lightblue;
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center center;
           cursor: pointer;
+
+          transition: all 1s;
+          -moz-transition: all 1s;
+          -webkit-transition: all 1s;
+          -o-transition: all 1s;
+        }
+        .pic:hover{
+          transform: scale(1.05);
+          -ms-transform: scale(1.05);
+          -webkit-transform: scale(1.05);
+          -o-transform: scale(1.05);
+          -moz-transform: scale(1.05);
+          transition: 1.5s transform;
         }
         .detail {
           width: 40%;

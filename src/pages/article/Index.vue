@@ -54,8 +54,10 @@
               {{item.description}}
             </div>
           </div>
-          <div v-if="!item.cover" @click="goDetail(item)" class="pic" :style="'background-image: url('+exampleImg+')'"></div>
-          <div v-if="item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          <div class="pic-box">
+            <div v-if="!item.cover" @click="goDetail(item)" class="pic" :style="'background-image: url('+exampleImg+')'"></div>
+            <div v-if="item.cover" class="pic" @click="goDetail(item)" :style="'background-image: url('+GLOBALDATA.serverUrl+item.cover+')'"></div>
+          </div>
         </div>
 
       </div>
@@ -377,13 +379,31 @@
               overflow: hidden;
             }
           }
-          .pic {
+          .pic-box{
             width: 190px;
             height: 110px;
+            overflow: hidden;
+          }
+          .pic {
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
             cursor: pointer;
+
+            transition: all 1s;
+            -moz-transition: all 1s;
+            -webkit-transition: all 1s;
+            -o-transition: all 1s;
+          }
+          .pic:hover{
+            transform: scale(1.3);
+            -ms-transform: scale(1.3);
+            -webkit-transform: scale(1.3);
+            -o-transform: scale(1.3);
+            -moz-transform: scale(1.3);
+            transition: 1s transform;
           }
         }
         .item:after {
